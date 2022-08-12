@@ -9,8 +9,10 @@ import 'package:e_commerce_app_admin/page/products_page.dart';
 import 'package:e_commerce_app_admin/page/report_page.dart';
 import 'package:e_commerce_app_admin/page/setting_page.dart';
 import 'package:e_commerce_app_admin/page/user_page.dart';
+import 'package:e_commerce_app_admin/provider/app_helper_provider.dart';
 import 'package:e_commerce_app_admin/widgets/dashboard_girdview.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DashboardPage extends StatelessWidget {
   static const routeName = "/dashboard";
@@ -18,6 +20,8 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<AppHelperProvider>(context, listen: false).getAllCategories();
+    Provider.of<AppHelperProvider>(context, listen: false).getAllProducts();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Dashboard"),
@@ -51,9 +55,7 @@ class DashboardPage extends StatelessWidget {
       ),
 
 
-    floatingActionButton: FloatingActionButton(onPressed: (){
-      Navigator.pushNamed(context, NewProductPage.routeName);
-    },child:const Icon(Icons.add)),);
+    );
   }
   String navigator(String value) {
     String route ="";

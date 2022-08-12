@@ -5,6 +5,7 @@ import 'package:e_commerce_app_admin/page/decider_page.dart';
 import 'package:e_commerce_app_admin/page/log_in_page.dart';
 import 'package:e_commerce_app_admin/page/new_product_page.dart';
 import 'package:e_commerce_app_admin/page/order_page.dart';
+import 'package:e_commerce_app_admin/page/product_page_details.dart';
 import 'package:e_commerce_app_admin/page/products_page.dart';
 import 'package:e_commerce_app_admin/page/report_page.dart';
 import 'package:e_commerce_app_admin/page/setting_page.dart';
@@ -12,6 +13,7 @@ import 'package:e_commerce_app_admin/page/user_page.dart';
 import 'package:e_commerce_app_admin/provider/app_helper_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
@@ -49,6 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: appColor,
       ),
+      builder: EasyLoading.init(),
       initialRoute:LauncherPage.routeName,
       routes: {
         LauncherPage.routeName:(context)=>LauncherPage(),
@@ -61,6 +64,7 @@ class MyApp extends StatelessWidget {
         UserPage.routeName:(context)=>UserPage(),
         SettingPage.routeName:(context)=>SettingPage(),
         ReportPage.routeName:(context)=>ReportPage(),
+        ProductDetailsPage.routeName:(context)=>ProductDetailsPage(),
       },
     );
   }
