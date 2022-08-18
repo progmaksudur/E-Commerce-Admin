@@ -1,4 +1,6 @@
 
+
+
 import 'package:e_commerce_app_admin/page/admin_dashboard.dart';
 import 'package:e_commerce_app_admin/page/category_page.dart';
 import 'package:e_commerce_app_admin/page/decider_page.dart';
@@ -11,6 +13,7 @@ import 'package:e_commerce_app_admin/page/report_page.dart';
 import 'package:e_commerce_app_admin/page/setting_page.dart';
 import 'package:e_commerce_app_admin/page/user_page.dart';
 import 'package:e_commerce_app_admin/provider/app_helper_provider.dart';
+import 'package:e_commerce_app_admin/provider/order_helper_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -22,6 +25,7 @@ void main() async{
   runApp(MultiProvider(
   providers: [
     ChangeNotifierProvider(create: (context)=>AppHelperProvider()),
+    ChangeNotifierProvider(create: (context)=>OrderProvider()),
 
   ]
   ,child: const MyApp()));

@@ -3,6 +3,7 @@ import 'package:e_commerce_app_admin/provider/app_helper_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/product_view.dart';
 import 'new_product_page.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -24,27 +25,14 @@ class _ProductsPageState extends State<ProductsPage> {
       body: Consumer<AppHelperProvider>(
         builder: (context, provider, _) => provider.productList.isEmpty
             ? const Center(
-          child: Text('No item found'),
+          child:Text("No product found"),
         )
-            : Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: ListView.builder(
-          itemCount: provider.productList.length,
-          itemBuilder: (context, index) {
-              final product = provider.productList[index];
-              return ListTile(
-                onTap: () => Navigator.pushNamed(
-                    context,
-                    ProductDetailsPage.routeName,
-                    arguments: product.id
-                ),
-                leading: Image.network(product.imageUrl!,fit: BoxFit.cover,height: 60,width: 60,),
-                title: Text(product.name!),
-              );
-          },
-        ),
-            ),
-      ),
+            : GridView.builder(
+            padding:const EdgeInsets.only(left: 5,right: 5,top: 5),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, crossAxisSpacing: 5, mainAxisSpacing: 5),
+            itemCount: provider.productList.length,
+            itemBuilder: (context, index) => ProductItem(product: provider.productList[index])),),
       floatingActionButton: FloatingActionButton(onPressed: (){
         Navigator.pushNamed(context, NewProductPage.routeName);
       },child:const Icon(Icons.add)),

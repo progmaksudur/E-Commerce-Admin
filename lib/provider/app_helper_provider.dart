@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../model/date model.dart';
 import '../model/purches_model.dart';
 
 class AppHelperProvider extends ChangeNotifier {
@@ -17,6 +18,25 @@ class AppHelperProvider extends ChangeNotifier {
 
   Future<void> addCategory(CategoryModel categoryModel) =>
       DbHelper.addNewCategory(categoryModel);
+
+  Future<void> rePurchase(String pId, num quantity, num price ,num sell, DateTime date, String category) {
+    final catModel = getCategoryModelByCatName(category);
+    catModel.productCount += quantity;
+    final purchaseModel = PurchaseModel(
+        dateModel: DateModel(
+            timestamp: Timestamp.fromDate(date),
+            year: date.year,
+            month: date.month,
+            day: date.day),
+        purchaseprice: price,
+        quantity: quantity,
+        productID: pId
+
+    );
+
+    return DbHelper.rePurchase(purchaseModel, catModel,sell);
+  }
+
 
   Future<void> addNewProduct(ProductModel productModel,
       PurchaseModel purchaseModel, CategoryModel categoryModel) {
